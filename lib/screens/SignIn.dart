@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/UserSession.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -99,11 +100,12 @@ class _SignInState extends State<SignIn> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepOrange,
                         foregroundColor: Colors.white),
-                    onPressed: () async{
+                    onPressed: () async {
                       if (_globalKey.currentState!.validate()) {
                         _globalKey.currentState!.save();
+                        // Save the email and password to the session
+                        await UserSession().saveSession(email, password);
                         Navigator.pushReplacementNamed(context, "/tabbarnav");
-
                       }
                     },
                     child: Text("SIGN IN")),
